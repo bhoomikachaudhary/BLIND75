@@ -1,0 +1,41 @@
+//JAVA
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character>stack=new Stack<>();
+        for(char ch:s.toCharArray()){
+            if(ch =='(' || ch == '{' || ch == '['){
+                stack.push(ch);
+            }else{
+                if(stack.isEmpty()){
+                    return false;
+                }
+                char top=stack.pop();
+                if((ch==')' && top!='(')||
+                   (ch=='}' && top!='{')||
+                   (ch==']' && top !='[')){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+        
+    }
+}
+
+
+
+#PYTHON3
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        bracket_map = {')': '(', '}': '{', ']': '['}
+
+        for ch in s:
+            if ch in bracket_map:  # closing bracket
+                if not stack or stack[-1] != bracket_map[ch]:
+                    return False
+                stack.pop()
+            else:  # opening bracket
+                stack.append(ch)
+
+        return not stack
