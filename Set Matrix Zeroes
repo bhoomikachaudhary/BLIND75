@@ -1,0 +1,69 @@
+//JAVA
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean firstColZero=false;
+        for (int i = 0;i<m;i++){
+            if(matrix[i][0]==0){
+                firstColZero = true;
+            }
+            for(int j=1;j<n;j++){
+                if(matrix[i][j]==0){
+                    matrix[i][0]=0;
+                    matrix[0][j]=0;
+                }
+            }
+        } 
+        for(int i =1;i<m;i++){
+            for (int j =1; j<n;j++){
+                if (matrix[i][0]==0|| matrix[0][j]==0){
+                    matrix[i][j]=0;
+                }
+            }
+        }  
+        if(matrix[0][0]==0){
+            for(int j =0;j<n;j++){
+                matrix[0][j]=0;
+            }
+        }  
+        if (firstColZero){
+            for(int i =0;i<m;i++){
+                matrix[i][0]=0;
+            }
+        }   
+    }
+} 
+
+
+#PYTHON
+
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        m, n = len(matrix), len(matrix[0])
+        first_col_zero = False
+
+        # Step 1: Mark rows & columns
+        for i in range(m):
+            if matrix[i][0] == 0:
+                first_col_zero = True
+            for j in range(1, n):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+
+        # Step 2: Set zeroes
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
+
+        # Step 3: First row
+        if matrix[0][0] == 0:
+            for j in range(n):
+                matrix[0][j] = 0
+
+        # Step 4: First column
+        if first_col_zero:
+            for i in range(m):
+                matrix[i][0] = 0
